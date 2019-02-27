@@ -1,0 +1,32 @@
+  server:
+    port: 8080
+
+  # Spring
+  spring:
+    datasource:
+      url: ${MYSQL_SERVICE_HOST}:${MYSQL_SERVICE_PORT}/${MYSQL_DATABASE}
+      username: ${MYSQL_USER}
+      password: ${MYSQL_PASSWORD}
+      driver-class-name: com.mysql.jdbc.Driver
+    jpa:
+      hibernate.ddl-auto: update
+      generate-ddl: true
+      show-sql: true
+    main:
+      banner-mode: "off"
+      #allow-bean-definition-overriding: true
+    cloud:
+      discovery:
+        client:
+          composite-indicator:
+            enabled: false
+
+
+  swagger:
+     paths: /v2/se.atg.service.member.api-docs,/swagger-ui.html,/swagger-resources/**,/webjars/**,/favicon.ico
+
+  keycloak:
+     auth-server-url: https://keycloak-ssoha.b9ad.pro-us-east-1.openshiftapps.com/auth
+     realm: master
+     resource: clientha
+     public-client: true

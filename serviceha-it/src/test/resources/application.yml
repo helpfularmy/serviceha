@@ -1,0 +1,5 @@
+ spring:
+  jms:
+    pub-sub-domain: true
+ mockserver:
+  url: ${MEMBERSERVICE_ENDPOINT:}
