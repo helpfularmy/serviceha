@@ -1,5 +1,8 @@
 package army.helpful.app.resource;
 
+import army.helpful.app.ProblemActionGeneratorUtil;
+import army.helpful.app.actions.EnumActionTypes;
+import army.helpful.app.actions.ProblemAction;
 import army.helpful.app.model.Content;
 import army.helpful.app.model.Title;
 import army.helpful.app.repository.ContentRepository;
@@ -11,9 +14,9 @@ import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.ws.rs.PathParam;
-import java.util.ArrayList;
 import java.util.List;
+
+import static army.helpful.app.actions.EnumActionTypes.CONTENT_ADD_SUCCESS;
 
 @Api(tags = {"Title Service"})
 @RestController
@@ -64,17 +67,30 @@ public class TitleResource {
             @ApiResponse(code = 400, message = "Input validation error"),
             @ApiResponse(code = 500, message = "Technical error!")})
     @ApiOperation("Create a new title")
-    public boolean createTitle(@RequestBody Content content) {
+    public ProblemAction createTitle(@RequestBody Content content) {
             Title title= titleRepository.findByName(content.getTitle().getName());
+
+            String description="";
 
             if(title==null){
                 title= titleRepository.save(content.getTitle());
+            }else{
+                description="title_exists";
             }
 
             content.setTitle(title);
 
             content= contentRepository.save(content);
-      return true;
+
+        EnumActionTypes type= CONTENT_ADD_SUCCESS;
+
+        if(description.length()>0){
+            type.setDescription(description);
+        }
+
+
+        return ProblemActionGeneratorUtil.generateProblemAction(content
+                                                              , type);
     }
 
 }
