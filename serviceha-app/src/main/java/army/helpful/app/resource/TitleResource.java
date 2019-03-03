@@ -74,6 +74,7 @@ public class TitleResource {
 
             if(title==null){
                 title= titleRepository.save(content.getTitle());
+                description="success";
             }else{
                 description="title_exists";
             }
@@ -83,10 +84,8 @@ public class TitleResource {
             content= contentRepository.save(content);
 
         EnumActionTypes type= CONTENT_ADD_SUCCESS;
+        type.setDescription(description);
 
-        if(description.length()>0){
-            type.setDescription(description);
-        }
         ProblemActionGeneratorUtil problemActionGeneratorUtil= new ProblemActionGeneratorUtil();
 
         return problemActionGeneratorUtil.generateProblemAction(content
