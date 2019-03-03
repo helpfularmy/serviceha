@@ -1,6 +1,6 @@
 package army.helpful.app.resource;
 
-import army.helpful.app.ProblemActionGeneratorUtil;
+import army.helpful.app.actions.ProblemActionGeneratorUtil;
 import army.helpful.app.actions.EnumActionTypes;
 import army.helpful.app.actions.ProblemAction;
 import army.helpful.app.model.Content;
@@ -87,9 +87,9 @@ public class TitleResource {
         if(description.length()>0){
             type.setDescription(description);
         }
+        ProblemActionGeneratorUtil problemActionGeneratorUtil= new ProblemActionGeneratorUtil();
 
-
-        return ProblemActionGeneratorUtil.generateProblemAction(content
+        return problemActionGeneratorUtil.generateProblemAction(content
                                                               , type);
     }
 

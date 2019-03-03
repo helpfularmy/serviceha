@@ -1,10 +1,10 @@
-package army.helpful.app;
+package army.helpful.app.actions;
 
 import army.helpful.app.actions.EnumActionTypes;
 import army.helpful.app.actions.ProblemAction;
 
 public class ProblemActionGeneratorUtil {
-    public static ProblemAction generateProblemAction(Object payloadObject,
+    public   ProblemAction generateProblemAction(Object payloadObject,
                                                   EnumActionTypes type){
 
 
