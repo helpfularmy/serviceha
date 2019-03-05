@@ -11,6 +11,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
+import org.keycloak.representations.AccessToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,7 +24,8 @@ import static army.helpful.app.actions.EnumActionTypes.CONTENT_ADD_SUCCESS;
 @RequestMapping(value = "/title")
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 public class TitleResource {
-
+    @Autowired
+    AccessToken accessToken;
     @Autowired
     TitleRepository titleRepository;
     @Autowired
@@ -68,7 +70,10 @@ public class TitleResource {
             @ApiResponse(code = 500, message = "Technical error!")})
     @ApiOperation("Create a new title")
     public ProblemAction createTitle(@RequestBody Content content) {
-            Title title= titleRepository.findByName(content.getTitle().getName());
+           String name= accessToken.getPreferredUsername();
+           String email= accessToken.getEmail();
+
+        Title title= titleRepository.findByName(content.getTitle().getName());
 
             String description="";
 
