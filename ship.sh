@@ -55,9 +55,9 @@ if [[ $app_name  =~ "client" ]]; then
 
 
 else
-         oc create route edge --service='serviceha' \
+         oc create route edge --service=$app_name \
                               --insecure-policy='Redirect' \
-                              --port=8080-tcp
+                              --port=8443-tcp
 
 
 fi

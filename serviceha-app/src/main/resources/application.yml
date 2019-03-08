@@ -1,5 +1,8 @@
   server:
-    port: 8080
+    port: 8443
+    remote_ip_header: x-forwarded-for
+    protocol_header: x-forwarded-proto
+    use-forward-headers: true
 
   # Spring
   spring:
@@ -26,7 +29,12 @@
      paths: /v2/se.atg.service.member.api-docs,/swagger-ui.html,/swagger-resources/**,/webjars/**,/favicon.ico
 
   keycloak:
-     auth-server-url: http://sso-ssoha.b9ad.pro-us-east-1.openshiftapps.com/auth
+     auth-server-url: https://sso-ssoha.b9ad.pro-us-east-1.openshiftapps.com/auth
      realm: master
-     resource: clientha
-     public-client: true
+     resource: serviceha
+     bearer-only: true
+     ssl-required: "external"
+     confidential-port: 0
+     verify-token-audience: true
+     credentials:
+      secret: "83721a89-474f-4631-8c9e-9cbaf4ae2588"

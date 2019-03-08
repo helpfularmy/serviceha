@@ -20,8 +20,12 @@ import org.springframework.security.web.authentication.session.SessionAuthentica
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Arrays;
 
 @KeycloakConfiguration
 public class SecurityConfig extends KeycloakWebSecurityConfigurerAdapter
@@ -52,14 +56,31 @@ public class SecurityConfig extends KeycloakWebSecurityConfigurerAdapter
     protected void configure(HttpSecurity http) throws Exception
     {
         super.configure(http);
+        http.authorizeRequests()
+                .antMatchers("/sso/login*").permitAll()
+                .antMatchers("/*").hasRole("ADMIN")
+                .anyRequest().permitAll();
         http.csrf().disable();
-        http
-                .authorizeRequests()
-                .antMatchers("/title/all").permitAll()
-                .antMatchers("/title/contra").hasRole("USER")
-                .antMatchers("/admin*").hasRole("ADMIN")
-                .anyRequest().fullyAuthenticated();
+       // http.csrf().disable();
+        //http
+          //      .authorizeRequests().anyRequest().permitAll();
+              //  .antMatchers("/sso/**").permitAll()
+                //.antMatchers("/title/all").permitAll()
+                //.antMatchers("/title/contra").hasRole("USER")
+                //.antMatchers("/admin*").hasRole("ADMIN")
+                //.anyRequest().fullyAuthenticated();
     }
+    @Bean
+    CorsConfigurationSource corsConfigurationSource()
+    {
+        CorsConfiguration configuration = new CorsConfiguration();
+        configuration.setAllowedOrigins(Arrays.asList("https://www.helpful.army"));
+        configuration.setAllowedMethods(Arrays.asList("GET","POST"));
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+        return source;
+    }
+
     @Bean
     @Scope(scopeName = WebApplicationContext.SCOPE_REQUEST,
             proxyMode = ScopedProxyMode.TARGET_CLASS)
