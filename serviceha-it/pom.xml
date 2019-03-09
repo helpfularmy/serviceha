@@ -5,7 +5,7 @@
     <packaging>jar</packaging>
 
     <parent>
-        <groupId>com.uyummedia.serviceha</groupId>
+        <groupId>army.helpful.serviceha</groupId>
         <artifactId>serviceha</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>

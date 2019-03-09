@@ -9,12 +9,12 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 
-	<groupId>com.uyummedia.serviceha</groupId>
+	<groupId>army.helpful.serviceha</groupId>
 	<artifactId>serviceha</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
-	<name>Uyum Twitter Service</name>
-	<description>Uyum Twitter Service for Spring Boot</description>
+	<name>Helpful Army Service</name>
+	<description>Helpful Army service using Spring Boot</description>
 	<repositories>
 		<repository>
 			<id>jboss-repo</id>

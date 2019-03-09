@@ -32,7 +32,7 @@ public class SwaggerConfig {
    }
 
    private static ApiInfo apiInfo() {
-       final Contact contact = new Contact("Uyum Media (GitHub)", "https://github.com/helpfularmy/serviceha.git", null);
+       final Contact contact = new Contact("Helpful Army (GitHub)", "https://github.com/helpfularmy/serviceha.git", null);
        return new ApiInfoBuilder()
                .title("Helpful Army Service")
                .contact(contact)
