@@ -57,6 +57,14 @@ public class SecurityConfig extends KeycloakWebSecurityConfigurerAdapter
     {
         super.configure(http);
         http.authorizeRequests()
+                .antMatchers("/admin/system/state/*",
+                        "/v2/api-docs",
+                        "/configuration/ui",
+                        "/swagger-resources",
+                        "/configuration/security",
+                        "/swagger-ui.html",
+                        "/webjars/**").permitAll()
+
                 .antMatchers("/sso/login*").permitAll()
                 .antMatchers("/*").hasRole("ADMIN")
                 .anyRequest().permitAll();

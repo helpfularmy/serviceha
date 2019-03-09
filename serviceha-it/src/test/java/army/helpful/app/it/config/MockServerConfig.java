@@ -1,4 +1,4 @@
-package com.uyummedia.service.twitter.it.config;
+package army.helpful.app.it.config;
 
 import org.mockserver.client.server.MockServerClient;
 import org.slf4j.Logger;
@@ -10,9 +10,6 @@ import org.springframework.context.annotation.Configuration;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-import static org.mockserver.model.HttpRequest.request;
-import static org.mockserver.model.HttpResponse.response;
-import static org.mockserver.model.JsonBody.json;
 
 
 @Configuration

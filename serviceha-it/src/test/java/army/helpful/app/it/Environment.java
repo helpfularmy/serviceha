@@ -1,4 +1,4 @@
-package com.uyummedia.service.twitter.it;
+package army.helpful.app.it;
 public class Environment {
     public static Environment LOCAL = new Environment("http://localhost:8080");
 

@@ -1,4 +1,4 @@
-package com.uyummedia.service.twitter.it.config;
+package army.helpful.app.it.config;
 
 import org.mockserver.client.server.MockServerClient;
 import org.mockserver.model.HttpRequest;
