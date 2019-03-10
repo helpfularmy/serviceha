@@ -68,7 +68,7 @@ public class SecurityConfig extends KeycloakWebSecurityConfigurerAdapter
                         "/configuration/security",
                         "/swagger-ui.html",
                         "/webjars/**").permitAll()
-
+                .antMatchers("/title/content/create").authenticated()
                 .antMatchers("/sso/login*").permitAll()
                 .antMatchers("/*").hasRole("ADMIN")
                 .anyRequest().permitAll();
@@ -87,27 +87,13 @@ public class SecurityConfig extends KeycloakWebSecurityConfigurerAdapter
     CorsConfigurationSource corsConfigurationSource()
     {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Arrays.asList("https://www.helpful.army"));
+        configuration.setAllowedOrigins(Arrays.asList("https://www.helpful.army"
+        , "https://localhost:3000"));
         configuration.setAllowedMethods(Arrays.asList("GET","POST"));
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
         return source;
     }
 
-    @Bean
-    @Scope(scopeName = WebApplicationContext.SCOPE_REQUEST,
-            proxyMode = ScopedProxyMode.TARGET_CLASS)
-    public AccessToken getAccessToken() {
-        HttpServletRequest request =
-                ((ServletRequestAttributes) RequestContextHolder
-                        .currentRequestAttributes()).getRequest();
-        KeycloakAuthenticationToken token = (KeycloakAuthenticationToken) request.getUserPrincipal();
-        KeycloakPrincipal principal=(KeycloakPrincipal)token.getPrincipal();
-        KeycloakSecurityContext session = principal.getKeycloakSecurityContext();
-        AccessToken accessToken = session.getToken();
-
-        return accessToken;
-
-    }
 
 }

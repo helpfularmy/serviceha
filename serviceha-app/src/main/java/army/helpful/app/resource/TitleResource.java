@@ -24,8 +24,7 @@ import static army.helpful.app.actions.EnumActionTypes.CONTENT_ADD_SUCCESS;
 @RequestMapping(value = "/title")
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 public class TitleResource {
-    @Autowired
-    AccessToken accessToken;
+
     @Autowired
     TitleRepository titleRepository;
     @Autowired
@@ -70,16 +69,15 @@ public class TitleResource {
             @ApiResponse(code = 500, message = "Technical error!")})
     @ApiOperation("Create a new title")
     public ProblemAction createTitle(@RequestBody Content content) {
-           String name= accessToken.getName();
-           String surname= accessToken.getFamilyName();
-           String email= accessToken.getEmail();
 
         Title title= titleRepository.findByName(content.getTitle().getName());
 
             String description="";
 
             if(title==null){
-                title= titleRepository.save(content.getTitle());
+                title=content.getTitle();
+
+                title= titleRepository.save(title);
                 description="success";
             }else{
                 description="title_exists";

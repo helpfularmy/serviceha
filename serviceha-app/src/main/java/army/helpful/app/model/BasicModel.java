@@ -10,6 +10,8 @@ public class BasicModel {
     private Integer id;
     @Column(name = "name")
     private String name;
+    @Column(name = "username")
+    private String username;
 
     public Integer getId() {
         return id;
@@ -25,5 +27,13 @@ public class BasicModel {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 }
