@@ -70,7 +70,8 @@ public class TitleResource {
             @ApiResponse(code = 500, message = "Technical error!")})
     @ApiOperation("Create a new title")
     public ProblemAction createTitle(@RequestBody Content content) {
-           String name= accessToken.getPreferredUsername();
+           String name= accessToken.getName();
+           String surname= accessToken.getFamilyName();
            String email= accessToken.getEmail();
 
         Title title= titleRepository.findByName(content.getTitle().getName());

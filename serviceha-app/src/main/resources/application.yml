@@ -1,10 +1,11 @@
   server:
-    port: 8443
+    port: 8443 # Define a custom port instead of the default 8080
     remote_ip_header: x-forwarded-for
     protocol_header: x-forwarded-proto
     use-forward-headers: true
+   # Spring
 
-  # Spring
+
   spring:
     datasource:
       url: ${MYSQL_SERVICE_HOST}:${MYSQL_SERVICE_PORT}/${MYSQL_DATABASE}

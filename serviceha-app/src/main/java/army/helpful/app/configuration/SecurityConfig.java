@@ -1,5 +1,8 @@
 package army.helpful.app.configuration;
 
+import org.apache.catalina.Context;
+import org.apache.tomcat.util.descriptor.web.SecurityCollection;
+import org.apache.tomcat.util.descriptor.web.SecurityConstraint;
 import org.keycloak.KeycloakPrincipal;
 import org.keycloak.KeycloakSecurityContext;
 import org.keycloak.adapters.KeycloakConfigResolver;
@@ -9,6 +12,7 @@ import org.keycloak.adapters.springsecurity.config.KeycloakWebSecurityConfigurer
 import org.keycloak.adapters.springsecurity.token.KeycloakAuthenticationToken;
 import org.keycloak.representations.AccessToken;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
@@ -69,6 +73,7 @@ public class SecurityConfig extends KeycloakWebSecurityConfigurerAdapter
                 .antMatchers("/*").hasRole("ADMIN")
                 .anyRequest().permitAll();
         http.csrf().disable();
+
        // http.csrf().disable();
         //http
           //      .authorizeRequests().anyRequest().permitAll();
@@ -104,4 +109,5 @@ public class SecurityConfig extends KeycloakWebSecurityConfigurerAdapter
         return accessToken;
 
     }
+
 }
