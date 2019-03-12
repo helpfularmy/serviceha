@@ -53,16 +53,15 @@ public class TitleResource {
         this.titleRepository = titleRepository;
     }
 
-    @GetMapping(value = "/contents/{name}")
+    @GetMapping(value = "/contents/{name}/{amount}")
     @ApiResponses({
             @ApiResponse(code = 200, message = "Operation successful"),
             @ApiResponse(code = 400, message = "Input validation error"),
             @ApiResponse(code = 500, message = "Technical error!")})
     @ApiOperation("Get Contents By Title")
-    public List<Content> getContentsByTitle(@PathVariable String name) {
-        Title title= titleRepository.findByName(name);
-
-        return title.getContents();
+    public List<Content> getContentsByTitle(@PathVariable String name, @PathVariable int amount) {
+        Pageable pageWithAmountofElements = PageRequest.of(0, amount);
+        return  contentRepository.findByTitleWithAmount(name, pageWithAmountofElements);
     }
 
 

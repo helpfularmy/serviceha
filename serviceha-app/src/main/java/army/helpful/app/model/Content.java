@@ -3,7 +3,7 @@ package army.helpful.app.model;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
-
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Entity
 public class Content extends BasicModel {
     @Column(name = "text")
