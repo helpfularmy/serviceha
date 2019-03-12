@@ -13,6 +13,8 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import org.keycloak.representations.AccessToken;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -30,14 +32,16 @@ public class TitleResource {
     @Autowired
     ContentRepository contentRepository;
 
-    @GetMapping(value = "/all")
+    @GetMapping(value = "/all/{amount}")
     @ApiResponses({
             @ApiResponse(code = 200, message = "Operation successful"),
             @ApiResponse(code = 400, message = "Input validation error"),
             @ApiResponse(code = 500, message = "Technical error!")})
     @ApiOperation("Get All Titles")
-    public List<Title> getAll() {
-        return titleRepository.findAll();
+    public List<Title> getAll(@PathVariable int amount) {
+        Pageable pageWithAmountofElements = PageRequest.of(0, amount);
+
+        return titleRepository.getAllWithAmount(pageWithAmountofElements);
     }
 
 
