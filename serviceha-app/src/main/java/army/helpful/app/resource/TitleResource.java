@@ -60,8 +60,9 @@ public class TitleResource {
             @ApiResponse(code = 500, message = "Technical error!")})
     @ApiOperation("Get Contents By Title")
     public List<Content> getContentsByTitle(@PathVariable String name, @PathVariable int amount) {
-        Pageable pageWithAmountofElements = PageRequest.of(0, amount);
-        return  contentRepository.findByTitleWithAmount(name, pageWithAmountofElements);
+        Pageable pageWithAmountofElements = PageRequest.of(amount/10, 10);
+        List<Content> contentList=  contentRepository.findByTitleWithAmount(name, pageWithAmountofElements);
+        return contentList;
     }
 
 
